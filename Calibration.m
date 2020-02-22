@@ -9,12 +9,14 @@ fprintf("MAKE SURE IT IS COMPLETELY STILL AND DOES NOT SWING");
 
 %% CHANGE TO REFLECT REALITY
 
-% Choose only 0, 1/2 pi, pi, 1.5 pi
+% Choose only 0, 1/2 pi, pi, 1.5 pi. it should be 0 and pi, if the docs are
+% correct. 
 offsetLargeBar = 0; 
 offsetsmallBar = pi;
-% Choose only 1 or -1
+% Choose only 1 or -1. According to the docs, gainLarge should be 1 and
+% gainSmall should be -1.
 gainLargeBar = 1;
-gainSmallBar = 1;
+gainSmallBar = -1;
 angles = zeros(3, 4, 2);
 %% MEASUREMENTS
 for i = 1:3
@@ -39,6 +41,17 @@ end
 figure;
 plot(angles(1,:,1), 'o'); hold on;
 plot(angles(1,:,2), 'o');
+%% TEST ANGLES VALUES
+angles(:,:,1) = [
+    0.1, 0.5*pi+0.1, pi + 0.1, 1.5*pi+0.1;
+    2*pi-0.05, 0.5*pi-0.05, pi-0.05, 1.5*pi-0.05;
+    0.05, 0.5*pi+0.05, pi+0.05, 1.5*pi+0.05;
+    ];
+angles(:,:,2) = [
+    pi, 0.5*pi, 0,1.5*pi;
+    pi+0.1,0.5*pi+0.1,0.1,1.5*pi+0.1;
+    pi-0.1,0.5*pi-0.1,2*pi-0.1,1.5*pi-0.1;
+    ];
 %% SANITIZING
 % Het idee van dit stukje code is dat er geen sprongen in de measurements
 % zitten omdat de sensor van 2pi naar 0 springt (of van pi naar -pi, etc)
@@ -47,8 +60,8 @@ for i = 1:3
        while (gainLargeBar*angles(i,j,1) < gainLargeBar*angles(i,j-1,1)) 
            angles(i,j,1) = angles(i,j,1) + gainLargeBar*2*pi;
        end
-       while (gainsmallBar*angles(i,j,2) < gainsmallBar*angles(i,j-1,2)) 
-           angles(i,j,2) = angles(i,j,2) + gainsmallBar*2*pi;
+       while (gainSmallBar*angles(i,j,2) < gainSmallBar*angles(i,j-1,2)) 
+           angles(i,j,2) = angles(i,j,2) + gainSmallBar*2*pi;
        end
    end
 end
@@ -59,6 +72,23 @@ x = [0, 0.5*pi, pi, 1.5*pi];
 xLarge = gainLargeBar*x + offsetLargeBar;
 xSmall = gainSmallBar*x + offsetsmallBar;
 for i = 1:3 % Als we de code echt netjes maken, voegen we alle i=1:3 samen
-    [gain(i,1), offset(i,1)] = polyfit(angles(i,:,1), xLarge);
-    [gain(i,2), offset(i,2)] = polyfit(angles(i,:,2), xSmall);
+    p1 = polyfit(angles(i,:,1), xLarge,1);
+    gain(i,1) = p1(1);
+    offset(i,1) = p1(2);
+    p2 = polyfit(angles(i,:,2), xSmall,1);
+    gain(i,2) = p2(1);
+    offset(i,2) = p2(2);
 end
+%% Normalize offset to something between -pi and pi
+for i = 1:3
+   while(offset(i,1) > pi)
+      offset(i,1) = offset(i,1) - 2*pi; 
+   end
+   while(offset(i,1) < -pi)
+       offset(i,1) = offset(i,1) + 2*pi;
+   end
+   
+end
+%%
+gainmid = mean(gain) %% EXPLICITELY WITHOUT ;
+offsetmean = mean(offset)%% EXPLICITELY WITHOUT ;
