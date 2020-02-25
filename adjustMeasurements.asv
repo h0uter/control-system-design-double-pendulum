@@ -1,9 +1,0 @@
-function theta = adjustMeasurements(oldTheta) 
-%% TODO: FILL IN
-offset1 = 0;
-offset2 = 0;
-gain1 = 1;
-gain2 = 1;
-
-
-end
