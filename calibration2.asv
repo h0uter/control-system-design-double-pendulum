@@ -22,15 +22,15 @@ gainLargeBar = 1;
 gainSmallBar = -1;
 angles = zeros(1, 4, 2);
 % variable = get_param('rotpentemplate','theta1')
-rounds = 3;
-gain = zeros(rounds,2);
-offset = zeros(rounds,2);
+
+gain = zeros(1,2);
+offset = zeros(1,2);
 x = [0, 0.5*pi, pi, 1.5*pi];
 xLarge = gainLargeBar*x + offsetLargeBar;
 xSmall = gainSmallBar*x + offsetsmallBar;
 
 %% MEASUREMENTS
-for i = 1:rounds
+for i = 1:1
     
     fprintf('\n\n\n PLACE THE LARGE BAR AT THE TOP AND PRESS ENTER TO CONTINUE...');
     input('','s');
@@ -57,7 +57,7 @@ plot(angles(1,:,2), 'o');
 %% SANITIZING
 % Het idee van dit stukje code is dat er geen sprongen in de measurements
 % zitten omdat de sensor van 2pi naar 0 springt (of van pi naar -pi, etc)
-for i = 1:rounds
+for i = 1:1 
    for j = 2:4 
        while (gainLargeBar*angles(i,j,1) < gainLargeBar*angles(i,j-1,1)) 
            angles(i,j,1) = angles(i,j,1) + gainLargeBar*2*pi;
@@ -75,8 +75,9 @@ for i = 1:rounds
     p2 = polyfit(angles(i,:,2), xSmall,1);
     gain(i,2) = p2(1);
     offset(i,2) = p2(2);
+end
 %% Normalize offset to something between -pi and pi
-
+for i = 1:1
    while(offset(i,1) > pi)
       offset(i,1) = offset(i,1) - 2*pi; 
    end

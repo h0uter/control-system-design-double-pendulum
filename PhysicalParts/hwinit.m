@@ -7,7 +7,7 @@ daoutoffs = [0.00];                   % output offset
 daoutgain = 1*[-6];                   % output gain
 
 % Sensor calibration:
-adinoffs = [-6.3703   -1.2582];
+adinoffs = [-0.0871   -1.2582];
 adingain = [1.2465    1.2559];
 
 adinoffs = [adinoffs 0 0 0 0 0];    % input offset

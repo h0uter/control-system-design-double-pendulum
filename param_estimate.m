@@ -1,5 +1,5 @@
 %%
-clc; clear all;
+% clc; clear all;
 syms l1 l2 m1 m2 c1 c2 I1 I2 b1 b2 km Te dTe theta1 theta2 dtheta1 dtheta2 ddtheta1 ddtheta2 u g
 %%
 P1 = m1*c1^2 + m2*l1^2 + I1;
