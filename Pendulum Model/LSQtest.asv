@@ -1,0 +1,9 @@
+%% Simulate Data;
+Parameters = [2,2; 2,2];
+sim('Level2Model');
+Realydata = out.Output2.data;
+Parameters = [0,0;0,0
+%% LSQnonlin
+func = @(x) LSQnonLinfunc(x,Realydata);
+x0 = 1;
+x = lsqnonlin(func,x0,[],[])
