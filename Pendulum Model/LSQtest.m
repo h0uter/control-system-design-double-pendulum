@@ -7,5 +7,5 @@ Realydata(5)
 %% LSQnonlin
 func = @(x) LSQnonLinfunc(x,Realydata);
 x0 = 1;
-options = optimoptions('lsqnonlin', 'Display', 'final');
+options = optimoptions('lsqnonlin', 'Display', 'iter');
 x = lsqnonlin(func,x0,[],[], options)
