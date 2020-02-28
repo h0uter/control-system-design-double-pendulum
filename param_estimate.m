@@ -1,5 +1,5 @@
 %%
-% clc; clear all;
+ %clc; clear all;
 syms l1 l2 m1 m2 c1 c2 I1 I2 b1 b2 km Te dTe theta1 theta2 dtheta1 dtheta2 ddtheta1 ddtheta2 u g
 %%
 P1 = m1*c1^2 + m2*l1^2 + I1;
@@ -27,7 +27,16 @@ func = M*ddtheta + C*dtheta + G - Tvec; %func = 0 according to dynamics
 theta2 = 0;
 dtheta2 = 0;
 ddtheta2 = 0;
+ddtheta1=0;
+
 func_if_theta2_zero = simplify(eval(func));
+%%
+%% theta 1 = 0, dtheta2 = 0; ddtheta2 = 0;
+theta1 = 0;
+dtheta1 = 0;
+ddtheta1 = 0;
+
+func_if_theta1_zero = simplify(eval(func));
 
 %% find double derivative of theta
 h = 0.01; %timestep!
