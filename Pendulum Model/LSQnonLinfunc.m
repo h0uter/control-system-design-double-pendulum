@@ -3,4 +3,4 @@ function err = LSQnonLinfunc(X, Realydata, Input)
 Parameters = CoenParams(X);
 simOut = sim('woutModel', 'SrcWorkspace', 'current');
 ydata = simOut.Theta.data;
-err = ydata - Realydata;
+err = (ydata - Realydata)/100; %% TODO: MAKE 100 the duration of the simulation
