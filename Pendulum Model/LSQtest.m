@@ -8,7 +8,6 @@ Input = [tout', 0.3*ones(1000000,1)];
 % Input = RealData.Input; % Or something like that. 
 outModel = sim('woutModel');
 Realydata = outModel.Theta.data;
-Parameters.km = 0;
 %% LSQnonlin
 func = @(x) LSQnonLinfunc(selectParam(x),Realydata, Input);
 
