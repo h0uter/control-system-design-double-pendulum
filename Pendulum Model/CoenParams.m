@@ -16,6 +16,6 @@ Parameters.Te = X(13);
 Parameters.P1 = X(4)*X(6)^2 + X(5)*X(2)^2 + X(8);
 Parameters.P2 = X(5)*X(7)^2 + X(9);
 Parameters.P3 = X(5)*X(2)*X(7);
-Parameters.g1 = X(1)*(X(4)*X(6)+X(5)*X(2));
+Parameters.g1 = X(1)*(X(4)*X(6) + X(5)*X(2));
 Parameters.g2 = X(5)*X(7)*X(1);
 end

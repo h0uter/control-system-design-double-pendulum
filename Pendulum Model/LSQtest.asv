@@ -1,0 +1,12 @@
+
+%% Load Data BOUND
+[YUnbound, YBound] = LoadData();
+
+%% LSQnonlin
+func = @(x) LSQnonLinfunc(x,YBound, Input, true); % + LSQnonLinfunc(x,YUnBound, Input, true);
+
+X0 = [9.8100    0.0991    0.1000    0.1251    0.0490   -0.0405    0.0600    0.0434       6.2420, ...
+    0.0002   49.8465    0.7007];
+options = optimoptions('lsqnonlin', 'Display', 'iter', 'MaxIter', 20);
+x = lsqnonlin(func,X0,[9, 0,0, 0, 0, -Inf, -Inf, 0,0],[], options);
+%x = lsqnonlin(func,X0,[9.7, 0.09, 0.09, 0.03, 0.00001, -0.2, 0, 0.05, 0],[9.9,0.15,0.15,0.5, 0.5, 0, 0.1, 0.1], options)
