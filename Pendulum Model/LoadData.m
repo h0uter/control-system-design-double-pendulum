@@ -2,7 +2,9 @@ function [RealyUnboundData, RealyBoundData] = LoadData()
 Dataset1 = load('../measurements/bound_constantTorque_1.mat');
 Dataset2 = load('../measurements/bound_constantTorque_2.mat');
 Dataset3 = load('../measurements/bound_constantTorque_3.mat');
+
 RealyBoundData = transformdata(Dataset1, Dataset2, Dataset3);
+
 Dataset1Unbound = load('../measurements/unbound_constantTorque_1.mat');
 Dataset2Unbound = load('../measurements/unbound_constantTorque_2.mat');
 Dataset3Unbound = load('../measurements/unbound_constantTorque_3.mat'); 
