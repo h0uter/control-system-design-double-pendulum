@@ -1,4 +1,4 @@
-function Parameters = CoenParams(X) 
+function Parameters = ConvertParams(X) 
 Parameters.g = X(1);
 Parameters.l1 = X(2);
 Parameters.l2 = X(3);
