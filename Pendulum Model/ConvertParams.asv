@@ -24,8 +24,5 @@ Parameters.LinTopM = [Parameters.P1 + Parameters.P2 + 2*Parameters.P3, Parameter
     0, Parameters.b2];
 Parameters.LinTopG = [ -g1-g2, g2; -g2, g2;];
 Parameters.LinTopGConstant = [ -pi*g2; -pi*g2];
-Parameters.LinTopA = [ zeros(2), eye(2); 
-    Parameters.LinTopM \ Parameters.LinTopG, Parameters.LinTopM \ Parameters.LinTopC];
-Parameters.LinTopB = [ zeros(2); inv(Parameters.LinTopM)];
-Parameters.LinTopC  = [ eye(2), zeros(2)];
+Parameters.LinTopA = [ zeros(2), eye(2); Parameters.LinTopM \ Parameters.LinTopG
 end
