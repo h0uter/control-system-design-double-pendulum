@@ -1,8 +1,0 @@
-h=0.01;
-time=10;
-lengthinput = 8;
-ampl=0.3;
-signal2 = [linspace(0,time,time*100/lengthinput)',  -0.15+ampl*round(rand(1,time/(h*lengthinput)))'];
-signal2=signal2 - mean(signal2(2,:));
-sim('ParamEstimate');
-
