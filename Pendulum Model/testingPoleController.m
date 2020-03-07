@@ -22,21 +22,26 @@ Input = [linspace(0,time,time*100/lengthinput)',  -1/2*ampl+ampl*round(rand(1,ti
 Data = sim('woutModel');
 Theta = Data.Theta;
 %% OBSERVE BEST MODEL
-Parameters.K = K1;
+Parameters.PoleGain = K1;
+Parameters.PoleReferenceGain = X1;
 Test1 = sim('LinearTopV2');
 figure;
 plot(Test1.Error.data);
-Parameters.K = K2;
+
+Parameters.PoleGain = K2;
+Parameters.PoleReferenceGain = X2;
 Test2 = sim('LinearTopV2');
 figure;
 plot(Test2.Error.data);
-Parameters.K = K3;
-Test3 = sim('LinearTopV2');
+
+Parameters.PoleGain = K1;
+Parameters.PoleReferenceGain = X1;
+Test1 = sim('LinearTopV2');
 figure;
-plot(Test3.Error.data);
-Parameters.K = K4;
-Test4 = sim('LinearTopV2');
+plot(Test1.Error.data);Parameters.PoleGain = K1;
+Parameters.PoleReferenceGain = X1;
+Test1 = sim('LinearTopV2');
 figure;
-plot(Test4.Error.data);
+plot(Test1.Error.data);
 %% 
 % P1 zijn de poles van de Observer. K1 wordt gebruikt.
