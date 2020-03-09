@@ -1,4 +1,4 @@
-load('measurements/blackbox/test.mat')
+load('measurements/blackbox/ampl04_time10_avg8.mat')
 input = inputsignal.data;
 theta1 = unwrap(Theta1.data);
 theta2 = unwrap(Theta2.data);
@@ -33,17 +33,4 @@ compare(data1,sys2)
 figure(4)
 compare(data2,sys1)
 %%
- load('measurements/blackbox/ampl04_time10_avg8.mat')
- input = inputsignal.data;
- theta1 = unwrap(Theta1.data);
- theta2 = unwrap(Theta2.data);
- output = [theta1, theta2];
- data2 = iddata(output,input,Ts);
- sys2 = armax(data2,[na nb nc nk]);
-% %[A,B,C,D,F,dA,dB,dC,dD,dF] = polydata(sys);
-figure(2)
-compare(data2,sys2)
-figure(3)
-compare(data1,sys2)
-figure(4)
-compare(data2,sys1)
+G =  idss(sys1);
