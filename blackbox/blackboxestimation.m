@@ -32,3 +32,6 @@ figure(3)
 compare(data1,sys2)
 figure(4)
 compare(data2,sys1)
+%%
+G =  idss(sys1);
+
