@@ -1,13 +1,13 @@
 function [RealyUnboundData, RealyBoundData] = LoadData() 
-Dataset1 = load('../measurements/whitebox/bound_constantTorque_1.mat');
-Dataset2 = load('../measurements/whitebox/bound_constantTorque_2.mat');
-Dataset3 = load('../measurements/whitebox/bound_constantTorque_3.mat');
+Dataset1 = load('measurements/whitebox/bound_constantTorque_1.mat');
+Dataset2 = load('measurements/whitebox/bound_constantTorque_2.mat');
+Dataset3 = load('measurements/whitebox/bound_constantTorque_3.mat');
 
 RealyBoundData = transformdata(Dataset1, Dataset2, Dataset3);
 
-Dataset1Unbound = load('../measurements/whitebox/unbound_constantTorque_1.mat');
-Dataset2Unbound = load('../measurements/whitebox/unbound_constantTorque_2.mat');
-Dataset3Unbound = load('../measurements/whitebox/unbound_constantTorque_3.mat'); 
+Dataset1Unbound = load('measurements/whitebox/unbound_constantTorque_1.mat');
+Dataset2Unbound = load('measurements/whitebox/unbound_constantTorque_2.mat');
+Dataset3Unbound = load('measurements/whitebox/unbound_constantTorque_3.mat'); 
 RealyUnboundData = transformdata(Dataset1Unbound, Dataset2Unbound, Dataset3Unbound);
 end
 function [Transformed] =  transformdata(Dataset1, Dataset2, Dataset3)

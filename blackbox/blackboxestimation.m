@@ -32,3 +32,12 @@ figure(3)
 compare(data1,sys2)
 figure(4)
 compare(data2,sys1)
+%%
+G =  idss(sys1);
+save('DT_SS_model_G','G')
+
+%% check controlability
+G2 = idss(sys2)
+Co = ctrb(G2)
+unco = length(G2.A) - rank(Co)
+% bad shit cause the black box models are not controllable
