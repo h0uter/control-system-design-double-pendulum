@@ -19,9 +19,11 @@ Parameters.P3 = X(5)*X(2)*X(7);
 Parameters.g1 = X(1)*(X(4)*X(6) + X(5)*X(2));
 Parameters.g2 = X(5)*X(7)*X(1);
 Parameters.LinTopM = [Parameters.P1 + Parameters.P2 + 2*Parameters.P3, Parameters.P2 + Parameters.P3;
-     Parameters.P2 + Parameters.P3, Parameters.P2];
+                      Parameters.P2 + Parameters.P3, Parameters.P2];
+ 
  Parameters.LinTopC =  [Parameters.b1 , 0;
-    0, Parameters.b2];
+                        0, Parameters.b2];
+
 g1 = Parameters.g1;
 g2 = Parameters.g2;
 Parameters.LinTopG = [ -g1-g2, -g2; -g2, -g2;];

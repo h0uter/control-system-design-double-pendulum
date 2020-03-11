@@ -1,6 +1,9 @@
 %% LOAD PARAM
 Parameters = EstimatedParams();
 close all
+%%
+Parameters.A
+
 %% TRIAL AND ERROR
 P1 = -[0.001, 20, 50, 60, 100];
 P2 =  -[0.01, 2, 50, 60, 100];
