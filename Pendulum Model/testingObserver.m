@@ -23,19 +23,19 @@ Data = sim('woutModel');
 Theta = Data.Theta;
 %% OBSERVE BEST MODEL
 Parameters.K = K1;
-Test1 = sim('LinearTopV2');
+Test1 = sim('LinearTopObserver');
 figure;
 plot(Test1.Error.data);
 Parameters.K = K2;
-Test2 = sim('LinearTopV2');
+Test2 = sim('LinearTopObserver');
 figure;
 plot(Test2.Error.data);
 Parameters.K = K3;
-Test3 = sim('LinearTopV2');
+Test3 = sim('LinearTopObserver');
 figure;
 plot(Test3.Error.data);
 Parameters.K = K4;
-Test4 = sim('LinearTopV2');
+Test4 = sim('LinearTopObserver');
 figure;
 plot(Test4.Error.data);
 %% 

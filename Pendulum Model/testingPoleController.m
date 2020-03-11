@@ -2,14 +2,14 @@
 Parameters = EstimatedParams();
 close all
 %% TRIAL AND ERROR
-P1 = -[1, 1.1, 1.5, 4, 8];
-P2 =  -[1, 2, 3, 6, 10];
-P3 = -[1.3, 2, 12, 13, 14];
-P4 = -[1.3, 2, 1200, 1300, 1400];
+P1 = -[0.001, 20, 50, 60, 100];
+P2 =  -[0.01, 2, 50, 60, 100];
+P3 = -[0.01, 10, 500, 600, 1000];
+P4 = -[0.001, 10, 500, 600, 1000];
 A = Parameters.LinTopA;
 B = Parameters.LinTopB;
 C = Parameters.LinTopXY;
-D = [ 0, 0 ; 0, 0];
+D = [ 0 ; 0];
 sys = ss(A, B, C,D);
 K1 = place(A, B, P1);
 K2 = place(A, B, P2);
@@ -42,11 +42,14 @@ firstLocation = [ 0 0];
 h=0.01;
 time=8;
 lengthinput = 8;
-ampl=0.1;
-Input = [linspace(0,time,time*100/lengthinput)',  -1/2*ampl+ampl*round(rand(1,time/(h*lengthinput)))'];
-% Input = [linspace(0,time,time*100/lengthinput)', ampl*ones(1,time/(h*lengthinput))'];
-%Data = sim('woutModel', 'SrcWorkspace', 'current');
-Theta = Data.Theta;
+ampl=0.01;
+Error = [linspace(0,time,time*100/lengthinput)',  -1/2*ampl+ampl*round(rand(1,time/(h*lengthinput)))', ...
+     -1/2*ampl+ampl*round(rand(1,time/(h*lengthinput)))', -1/2*ampl+ampl*round(rand(1,time/(h*lengthinput)))', ...
+     -1/2*ampl+ampl*round(rand(1,time/(h*lengthinput)))', -1/2*ampl+ampl*round(rand(1,time/(h*lengthinput)))'];
+Input = Error(:, 1:3);
+Input = [linspace(0,time,time*100/lengthinput)', ampl*ones(1,time/(h*lengthinput))'];
+Data = sim('woutModel', 'SrcWorkspace', 'current');
+%Theta = Data.Theta;
 figure;
 plot(Data.Theta.data);
 %% OBSERVE BEST MODEL
@@ -72,6 +75,12 @@ Parameters.PoleGain = K4;
 % Parameters.PoleReferenceGain = X1;
 Test4 = sim('LinearTopV2');
 subplot(2,2,4);
-plot(Test4.Theta_Model.data(:,1:2))
+plot(Test4.Theta_Model.data(:,1:2));
+figure;
+plot(Test1.UnSaturatedInput.data);
+hold on;
+plot(Test2.UnSaturatedInput.data);
+plot(Test3.UnSaturatedInput.data);
+plot(Test4.UnSaturatedInput.data);
 %% 
 % P1 zijn de poles van de Observer. K1 wordt gebruikt.
