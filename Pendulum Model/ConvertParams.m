@@ -40,7 +40,7 @@ Parameters.K =  1.0e+06 * [
    1.361872931165567  -0.000000486585896   0.000000746864311  -0.000376375308764  -0.000457120070194 ];
 Parameters.PoleGain = 1.0e+04 *[ -0.0001    -4.5752    -5.2971    -1.1059    -0.5236];
 sys = ss(Parameters.LinTopA, Parameters.LinTopB, Parameters.LinTopXY, 0);
-Parameters.h = 0.001;
+Parameters.h = 0.01;
 sysd = c2d(sys, Parameters.h);
 Parameters.Ad = sysd.A;
 Parameters.Bd = sysd.B;
