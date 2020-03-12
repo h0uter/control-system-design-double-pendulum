@@ -43,7 +43,7 @@ sys = ss(Parameters.LinTopA, Parameters.LinTopB, Parameters.LinTopXY, 0);
 Parameters.h = 0.001;
 sysd = c2d(sys, Parameters.h);
 Parameters.Ad = sysd.A;
-Paramweters.Bd = sysd.B;
+Parameters.Bd = sysd.B;
 Parameters.Cd = sysd.C;
 
 end
