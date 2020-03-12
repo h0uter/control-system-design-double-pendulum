@@ -8,9 +8,9 @@ sys = ss(A,B,C,0);
 h = 0.00001;
 %% LQR params
 Q = [zeros(1,5);
-    zeros(2,1), eye(2), zeros(2);
+    zeros(2,1), 1000*eye(2), zeros(2);
     zeros(2,5);];
-R = 0.01;
+R = 0.51;
 [K,S,e] = lqr(sys, Q,R);
 Parameters.PoleGain = K;
 Ac = A - B*K;
