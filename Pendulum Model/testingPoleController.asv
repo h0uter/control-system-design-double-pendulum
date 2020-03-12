@@ -1,23 +1,19 @@
 %% LOAD PARAM
 clear all;
 Parameters = EstimatedParams();
-h=0.00002;
 close all
 %%
 %% TRIAL AND ERROR
-P1 = -[5, 12, 500, 600, 1000];
-P2 =  -[5, 12, 50, 60, 100];
+P1 = -[5, 16, 500, 600, 1000];
+P2 =  -[5, 16, 50, 60, 100];
 %P3 = -[0.01, 2, 500, 600, 1000];
-P3 = -[10, 16, 500, 600, 1000];
-P4 = -[10, 16, 50, 60, 100];
+P3 = -[5, 8, 10, 20, 30];
+P4 = -[5, 8, 100, 200, 300];
 A = Parameters.LinTopA;
 B = Parameters.LinTopB;
 C = Parameters.LinTopXY;
 D = [ 0 ; 0];
 sys = ss(A, B, C,D);
-sysd = c2d(sys,h);
-Ad = sysd.A;
-Bd = sysd.B;
 %K1 = [ 0, 0, 0 , 0 , 0];
 K1 = place(A, B, P1);
 K2 = place(A, B, P2);
@@ -37,19 +33,17 @@ sysCL1 = ss(Ac1, B, C, D);
 sysCL2 = ss(Ac2, B, C, D);
 sysCL3 = ss(Ac3, B, C, D);
 sysCL4 = ss(Ac4, B, C, D);
-figure;
-subplot(2,2,1);
 impulse(sysCL1);
-subplot(2,2,2);
+figure;
 impulse(sysCL2);
-subplot(2,2,3);
+figure;
 impulse(sysCL3);
-subplot(2,2,4);
+figure;
 impulse(sysCL4);
 
 %% RETRIEVING DATA FROM NL MODEL
 firstLocation = [ -0.001 0];
-
+h=0.00002;
 time=10;
 lengthinput = 8;
 lengthSpace = int32(time/(h*lengthinput));
