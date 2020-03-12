@@ -9,9 +9,9 @@ h = Parameters.h;
 
 %% LQR params
 Q = [zeros(1,5);
-    zeros(2,1),eye(2), zeros(2);
+    zeros(2,1),0.1*eye(2), zeros(2);
     zeros(2,5);];
-R = 0.51;
+R = 10^7;
 [K,S,e] = dlqr(Parameters.Ad, Parameters.Bd, Q,R);
 Parameters.PoleGain = K;
 %Ac = A - B*K;
@@ -35,3 +35,5 @@ Test1 = sim('LinearTopTest_discrete');
 toc;
 figure;
 plot(Theta_Model.data(:,2:3))
+figure;
+plot(UnSaturatedInput);
