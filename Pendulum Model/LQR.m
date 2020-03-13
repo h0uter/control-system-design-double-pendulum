@@ -18,8 +18,8 @@ sys2 = ss(Ac, B, C, 0);
 figure;
 step(sys2);
 %% Simulate variance
-firstLocation = [ 0, -0.000, 0.1, 0 ,0];
-
+firstLocationFull = [ 0, -0.4, 0.4, 0 ,0];
+firstLocation = [-0.3, 0.4];
 time=10;
 lengthinput = 8;
 lengthSpace = int32(time/(h*lengthinput));
@@ -30,15 +30,13 @@ ERRORVAR = [linspace(0,time,lengthSpace)',  -1/2*ampl+ampl*round(rand(1,lengthSp
 %% 
 
 tic;
-Test1 = sim('LinearTopTest_discrete');
-toc;
 %figure;
 %plot(Theta_Model.data(:,2:3))
 %figure;
 %plot(UnSaturatedInput);
 %% 
 Parameters.PoleGain = K2;
-toc;
+tic;
 Test2 = sim('LinearTopTest');
 toc;
 figure;

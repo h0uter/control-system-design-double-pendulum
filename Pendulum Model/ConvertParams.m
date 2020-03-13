@@ -35,16 +35,17 @@ Parameters.LinTopA = [-1/Parameters.Te,0,0,0,0,;
 
 Parameters.LinTopB = [ Parameters.km /Parameters.Te; zeros(4,1)];
 Parameters.LinTopXY  = [zeros(2,1), eye(2), zeros(2)];
-Parameters.K =  1.0e+06 * [
-    -3.369289588962263   0.000001858945972   0.000001374147167   0.000656652897551   0.001735682079539;
-   1.361872931165567  -0.000000486585896   0.000000746864311  -0.000376375308764  -0.000457120070194 ];
+Parameters.K =  1.0e+04 * [
+   0.0001    0.0312   -0.0065   -0.0110   -0.5969;
+   -0.0001   -0.0034    0.0558    0.0506    4.0877 ];
 %Parameters.PoleGain = 1.0e+02  *[
 %    -0.000067591280490  -0.969428411401532  -1.022005191642317  -0.193438191643539  -0.089193487968499];
 sys = ss(Parameters.LinTopA, Parameters.LinTopB, Parameters.LinTopXY, 0);
-Parameters.h = 0.001;
+Parameters.h = 0.0001;
 sysd = c2d(sys, Parameters.h);
 Parameters.Ad = sysd.A;
 Parameters.Bd = sysd.B;
 Parameters.Cd = sysd.C;
-
+Parameters.PoleGainLQR = [ -0.2058   90.6459   80.9736   14.0066    7.0228];
+Parameters.PoleGainPolePlace = [ 0.0810    4.9899    4.0572    0.1231    0.3565];
 end

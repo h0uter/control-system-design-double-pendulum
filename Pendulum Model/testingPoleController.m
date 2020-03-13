@@ -5,7 +5,7 @@ h=0.00002;
 close all
 %%
 %% TRIAL AND ERROR
-P1 = -[5, 12, 500, 600, 1000];
+P1 = -[.5, 1.2, 50.0, 60.0, 100.0];
 P2 =  -[5, 12, 50, 60, 100];
 %P3 = -[0.01, 2, 500, 600, 1000];
 P3 = -[10, 16, 500, 600, 1000];
@@ -15,9 +15,6 @@ B = Parameters.LinTopB;
 C = Parameters.LinTopXY;
 D = [ 0 ; 0];
 sys = ss(A, B, C,D);
-sysd = c2d(sys,h);
-Ad = sysd.A;
-Bd = sysd.B;
 %K1 = [ 0, 0, 0 , 0 , 0];
 K1 = place(A, B, P1);
 K2 = place(A, B, P2);
@@ -48,8 +45,8 @@ subplot(2,2,4);
 impulse(sysCL4);
 
 %% RETRIEVING DATA FROM NL MODEL
-firstLocation = [ -0.001 0];
-
+firstLocation = [ -0.3 0.3];
+firstLocationFull = [ 0 , firstLocation, 0, 0];
 time=10;
 lengthinput = 8;
 lengthSpace = int32(time/(h*lengthinput));
