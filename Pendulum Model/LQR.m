@@ -42,4 +42,16 @@ toc;
 figure;
 plot(Test2.Theta_Model.data(:, 2:3));
 figure; 
-plot(Test2.UnSaturatedInput)
+plot(Test2.UnSaturatedInput);
+
+%% animate the pendulum from data
+
+t = Test2.Theta_Model.Time;
+y = Test2.Theta_Model.Data(:, 2:3);
+
+for k=1:length(t)
+    % plot only the fifth step each time
+    if mod(k, 15) == 0
+        drawpend(y(k,:));
+    end
+end
