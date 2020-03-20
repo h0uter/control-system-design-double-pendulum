@@ -6,7 +6,7 @@ B = Parameters.LinTopB;
 C = Parameters.LinTopXY;
 sys = ss(A,B,C,0);
 h = Parameters.h;
-
+bode(sys)
 %% LQR params
 Q = diag([0, 10, 10^5, 10000, 100]);
 R = 1000;

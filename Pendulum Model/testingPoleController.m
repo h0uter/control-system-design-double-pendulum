@@ -81,12 +81,12 @@ plot(Test2.Theta_Model.data(:,2:3))
 
 Parameters.PoleGain = K3;
 % Parameters.PoleReferenceGain = X1;
-Test3 = sim('LinearTopTest');
+% Test3 = sim('LinearTopTest');
 %subplot(2,2,3);
 %plot(Test3.Theta_Model.data(:,2:3))
 Parameters.PoleGain = K4;
 % Parameters.PoleReferenceGain = X1;
-Test4 = sim('LinearTopTest');
+% Test4 = sim('LinearTopTest');
 %subplot(2,1,4);
 %plot(Test4.Theta_Model.data(:,2:3));
 figure;
