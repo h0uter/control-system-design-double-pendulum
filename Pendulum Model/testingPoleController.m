@@ -68,7 +68,7 @@ tic;
 Test1 = sim('LinearTopTest');
 Test1time = toc;
 figure;
-subplot(2,2,1);
+subplot(2,1,1);
 plot(Test1.Theta_Model.data(:,2:3))
 
 Parameters.PoleGain = K2;
@@ -76,33 +76,33 @@ Parameters.PoleGain = K2;
 
 Test2timestart = toc;
 Test2 = sim('LinearTopTest');
-subplot(2,2,2);
+subplot(2,1,2);
 plot(Test2.Theta_Model.data(:,2:3))
 
 Parameters.PoleGain = K3;
 % Parameters.PoleReferenceGain = X1;
 Test3 = sim('LinearTopTest');
-subplot(2,2,3);
-plot(Test3.Theta_Model.data(:,2:3))
+%subplot(2,2,3);
+%plot(Test3.Theta_Model.data(:,2:3))
 Parameters.PoleGain = K4;
 % Parameters.PoleReferenceGain = X1;
 Test4 = sim('LinearTopTest');
-subplot(2,2,4);
-plot(Test4.Theta_Model.data(:,2:3));
+%subplot(2,1,4);
+%plot(Test4.Theta_Model.data(:,2:3));
 figure;
 
 plot(Test1.UnSaturatedInput.data);
 title('INPUT');
 hold on;
 plot(Test2.UnSaturatedInput.data);
-plot(Test3.UnSaturatedInput.data);
-plot(Test4.UnSaturatedInput.data);
+%plot(Test3.UnSaturatedInput.data);
+%plot(Test4.UnSaturatedInput.data);
 figure; 
 plot(Test1.Error.data);
 hold on;
 plot(Test2.Error.data);
-plot(Test3.Error.data);
-plot(Test4.Error.data);
+%plot(Test3.Error.data);
+%plot(Test4.Error.data);
 
 title('Error');
 %figure;
