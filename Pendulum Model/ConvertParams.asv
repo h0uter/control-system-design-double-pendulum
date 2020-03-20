@@ -48,5 +48,5 @@ Parameters.Bd = sysd.B;
 Parameters.Cd = sysd.C;
 Parameters.PoleGainLQR = [ -0.2058   90.6459   80.9736   14.0066    7.0228];
 Parameters.PoleGainPolePlace = [ 0.0810    4.9899    4.0572    0.1231    0.3565];
-Parameters.ErrorGains = 0.95 +  0.1*rand(1,5);
+Parameters.ERRORGAINS = 0.8 +  0
 end
