@@ -2,7 +2,10 @@
 [YUnbound, YBound] = LoadData();
 YNewData = LoadData2();
 firstLocation = YBound(1,:);
+Parameters=EstimatedParams();
+
 simOut = sim('woutModel', 'SrcWorkspace', 'current');
+
 %% LSQnonlin
 func = @(x) LSQnonLinfunc(x,YBound, Input, true, firstLocation); % + LSQnonLinfunc(x,YUnbound, Input, false);
 

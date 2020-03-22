@@ -1,5 +1,0 @@
-sim('SimpelModel');
-
-fun = @(x) lsim(tf(x(1),[x(2) x(3)], Input)-fft(Simple);
-x0 = [1, 1,1];
-x = lsqnonlin(fun,x0, [],[]);

@@ -1,7 +1,7 @@
 
 %% Load Data BOUND
 % [YUnbound, YBound] = LoadData();
-YBoundData = load('../measurements/bound1_constantTorque_1.mat');
+YBoundData = load('../../measurements/bound1_constantTorque_1.mat');
 YBound = [YBoundData.Theta1.data, YBoundData.Theta2.data];
 tout = linspace(0,10000,1000000);
 Input = [tout', 0.0*ones(1000000,1)];
