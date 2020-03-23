@@ -18,7 +18,8 @@ figure(1)
 compare(data1,sys1)
 
 %%
- load('measurements/blackbox/ampl04_time10_avg8_2copy.mat')
+ load('measurements/blackbox/ampl04_time10_avg8_2.mat')
+
  input = inputsignal.data;
  theta1 = unwrap(Theta1.data);
  theta2 = unwrap(Theta2.data);
@@ -33,10 +34,22 @@ compare(data1,sys2)
 figure(4)
 compare(data2,sys1)
 %%
+figure(5)
+subplot(1,2,1);
+compare(data1,sys1);
+subplot(1,2,2);
+compare(data2,sys1);
+
+figure(6)
+subplot(2,1,1);
+compare(data1,sys1);
+subplot(2,1,2);
+compare(data2,sys1);
+%%
 G1 =  idss(sys1);
 Co1 = ctrb(G1)
 unco1 = length(G1.A) - rank(Co1)
-save('DT_SS_model_G1','G1')
+%save('DT_SS_model_G1','G1')
 
 %% check controlability
 G2 = idss(sys2);
