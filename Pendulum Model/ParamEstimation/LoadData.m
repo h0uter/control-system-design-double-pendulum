@@ -1,14 +1,27 @@
-function [RealyUnboundData, RealyBoundData] = LoadData() 
+function [RealyUnboundData, RealyBoundData, RealyBoundDataS, RealyUnboundS] = LoadData() 
+% Load the data used in the Parameter Estimation. We use 3 averaged sets of
+% to make sure measurement noise (assumed to be white noise) has as little
+% influence as possible. Also, the measurements are unwrapped. 
 Dataset1 = load('measurements/whitebox/bound_constantTorque_1.mat');
 Dataset2 = load('measurements/whitebox/bound_constantTorque_2.mat');
 Dataset3 = load('measurements/whitebox/bound_constantTorque_3.mat');
 
 RealyBoundData = transformdata(Dataset1, Dataset2, Dataset3);
+Dataset1S = load('measurements/whitebox/bound_sinTorque_1.mat');
+Dataset2S = load('measurements/whitebox/bound_sinTorque_2.mat');
+Dataset3S = load('measurements/whitebox/bound_sinTorque_3.mat');
+
+RealyBoundDataS = transformdata(Dataset1S, Dataset2S, Dataset3S);
 
 Dataset1Unbound = load('measurements/whitebox/unbound_constantTorque_1.mat');
 Dataset2Unbound = load('measurements/whitebox/unbound_constantTorque_2.mat');
 Dataset3Unbound = load('measurements/whitebox/unbound_constantTorque_3.mat'); 
 RealyUnboundData = transformdata(Dataset1Unbound, Dataset2Unbound, Dataset3Unbound);
+
+Dataset1UnboundS = load('measurements/whitebox/unbound_sinTorque_1.mat');
+Dataset2UnboundS = load('measurements/whitebox/unbound_sinTorque_2.mat');
+Dataset3UnboundS = load('measurements/whitebox/unbound_sinTorque_3.mat'); 
+RealyUnboundS = transformdata(Dataset1UnboundS, Dataset2UnboundS, Dataset3UnboundS);
 end
 function [Transformed] =  transformdata(Dataset1, Dataset2, Dataset3)
 Realydata1 = [Dataset1.Theta1.data, Dataset1.Theta2.data];

@@ -1,9 +1,16 @@
 %% Load Data BOUND
-[YUnbound, YBound] = LoadData();
-YNewData = LoadData2();
+[YUnbound, YBound, RealyBoundDataS, RealyUnboundS] = LoadData();
+YNewData = LoadData2(); %Used in estimating 
 firstLocation = YBound(1,:);
+Parameters=EstimatedParams();
+
 simOut = sim('woutModel', 'SrcWorkspace', 'current');
+
 %% LSQnonlin
+% We estimate the starting velocity (because we can't measure that)
+% and the parameters given by the documents. 
+% The accepted inputs are: Parameters, physical data (Y & Input, if the
+% second bar is fixed to the first and the firstLocation of the 
 func = @(x) LSQnonLinfunc(x,YBound, Input, true, firstLocation); % + LSQnonLinfunc(x,YUnbound, Input, false);
 
 % X = [ g, l1, l2, m1,  m2,  c1, c2, I1, I2,b1, b2, km, Te, initialSpeed]
@@ -34,18 +41,13 @@ plot(ydata(9:10:end-1,2)); hold on;
 plot(YUnbound(:,2))
 %% 
 function YNewData = LoadData2() 
+% In this case, only 1 dataset can be used, because the results are wildly
+% different each time. In this setup, we let the second bar swing from an
+% intial position to estimate g, c2, m2, I2, b2. Because we started
+% recording after the bar started swinging to prevent errors in the
+% modeling because of external disturbances (our hands) the initial
+% position is different for every recording. Because that is a very big
+% influence, it is impractical to average over the different measurements. 
 Dataset1 = load('measurements/whitebox/bound1_constantTorque_1.mat');
 YNewData = unwrap([Dataset1.Theta1.data, Dataset1.Theta2.data]);
-end
-
-function [Transformed] =  transformdata(Dataset1, Dataset2, Dataset3)
-Realydata1 = [Dataset1.Theta1.data, Dataset1.Theta2.data];
-Realydata2 = [Dataset2.Theta1.data, Dataset2.Theta2.data];
-Realydata3 = [Dataset3.Theta1.data, Dataset3.Theta2.data];
-Theta1 = [Realydata1(:,1), Realydata2(:,1), Realydata3(:,1)];
-Theta2 = [Realydata1(:,2), Realydata2(:,2), Realydata3(:,2)];
-Theta1avg = mean(unwrap(Theta1),2);
-Theta2avg = mean(unwrap(Theta2),2);
-Transformed = [Theta1avg, Theta2avg];
-
 end
