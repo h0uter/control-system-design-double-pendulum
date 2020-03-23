@@ -7,7 +7,7 @@ Parameters=EstimatedParams();
 simOut = sim('woutModel', 'SrcWorkspace', 'current');
 
 %% LSQnonlin
-% We estimate the starting velocity (because we can't measure that)
+% We estimate the starting velocity (because we can't measure that( 
 % and the parameters given by the documents. 
 % The accepted inputs are: Parameters, physical data (Y & Input, if the
 % second bar is fixed to the first and the firstLocation of the 
