@@ -1,7 +1,7 @@
 %% Load Data BOUND
 close all;
 load('ParameterTest.mat');
-[YUnbound, YBound, RealyBoundDataS, RealyUnboundS] = LoadData();
+[YUnbound, YBound, RealyBoundDataS, RealyUnboundS, time] = LoadData();
 YNewData = LoadData2(); %Used in estimating 
 firstLocation = YBound(1,:);
 Parameters=EstimatedParams();
@@ -35,28 +35,28 @@ ydata = simOut.Theta.data;
 mse = zeros(2,4);
 mse(:,1) = MSEDATA(YBound,ydata);
 
-plotData(ydata, YBound);
+plotData(ydata, YBound, time);
 %% Sinusoidal
 Inputzero = Input;
 Input = [linspace(0,10,1000); sin(linspace(0,10,1000))]'; 
 simOut = sim('boundedModel', 'SrcWorkspace', 'current');
 ydata = simOut.Theta.data;
 mse(:, 2) = MSEDATA(RealyBoundDataS,ydata);
-plotData(ydata, RealyBoundDataS);
+plotData(ydata, RealyBoundDataS, time);
 %% UNBOUND
 firstLocation = YUnbound(1,:)
 Input = Inputzero;
 simOut = sim('woutModel', 'SrcWorkspace', 'current');
 ydata = simOut.Theta.data;
 mse(:, 3) = MSEDATA(YUnbound,ydata);
-plotData(ydata, YUnbound);
+plotData(ydata, YUnbound, time);
 %% Simulating Sinusoidal Torque
 Input = [linspace(0,10,1000); sin(linspace(0,10,1000))]'; 
 firstLocation = RealyUnboundS(1,:);
 simOut = sim('woutModel', 'SrcWorkspace', 'current');
 ydata = simOut.Theta.data;
 mse(:, 4) = MSEDATA(RealyUnboundS,ydata)
-plotData(ydata, RealyUnboundS);
+plotData(ydata, RealyUnboundS, time);
 %% 
 function YNewData = LoadData2() 
 % In this case, only 1 dataset can be used, because the results are wildly
@@ -73,12 +73,23 @@ function mseMean = MSEDATA(RealData, ModelData)
 diff = RealData - ModelData(1:10:end,:);
 mseMean = mean(diff .* diff);
 end
-function [] = plotData(ydata, Realdata) 
+function [] = plotData(ydata, Realdata, time) 
+y1 = timeseries(ydata(1:10:end,1), time);
+y2 = timeseries(ydata(1:10:end,2), time);
+Ry1 = timeseries(Realdata(:,1), time);
+Ry2 = timeseries(Realdata(:,2), time);
 figure;
 subplot(2,1,1)
-plot(ydata(9:10:end-1,1)); hold on;
-plot(Realdata(:,1))
+plot(y1); hold on;
+plot(Ry1);
+legend('Model Data','Measured Data');
+xlabel('Time [s]');
+ylabel('angle [rad]');
 subplot(2,1,2)
-plot(ydata(9:10:end-1,2)); hold on;
-plot(Realdata(:,2))
+
+plot(y2); hold on;
+plot(Ry2);
+legend('Model Data','Measured Data');
+xlabel('Time [s]');
+ylabel('angle [rad]');
 end
