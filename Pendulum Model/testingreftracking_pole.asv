@@ -33,8 +33,8 @@ Error = ERRORVAR;
 Input = [linspace(0,time,lengthSpace)', 0*ones(1,lengthSpace)'];
 %% OBSERVE BEST MODEL
 t=linspace(0,10,10/h);
-Reference = [t;zeros(1,length(t));0.3*sin(t);-0.3*sin(t);zeros(1,length(t));zeros(1,length(t))]';
-Parameters.Lff = [0;1;0;0;0]';
+Reference = [t;0.3*sin(t);0.3*sin(t)]';
+Parameters.Lff = [1;0]';
 Parameters.PoleGain = K2;
 Test2 = sim('reftracking_LinearTopTest');
 timesim=linspace(0,10,length(Test2.Theta_Model.data(:,2:3)));
