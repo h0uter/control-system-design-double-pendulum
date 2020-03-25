@@ -5,8 +5,8 @@ h=0.00002;
 close all
 %%
 %% TRIAL AND ERROR
-P1 = -[1, 6, 50.0, 60.0, 100.0];
-P2 =  -[1, 12, 50, 60, 100];
+P1 = -[4, 8, 50.0, 60.0, 100.0];
+P2 =  -[5, 12, 50, 60, 100];
 P3 = -[2, 10, 50.0, 60.0, 100.0];
 P4 = -[10, 16, 50, 60, 100];
 A = Parameters.LinTopA;
@@ -43,11 +43,12 @@ sysCL4 = ss(Ac4, B, C, D);
  impulse(sysCL4);
 
 %% RETRIEVING DATA FROM NL MODEL
-firstLocation = [ -0.3 0.1];
+firstLocation = [ -0.3 0.3];
 firstLocationFull = [ 0 , firstLocation, 0, 0];
 
 %% OBSERVE BEST MODEL
 Parameters.PoleGain = K1;
+Parameters.PoleReferenceGain = K1;
 tic;
 Test1 = sim('LinearTopTest');
 Test1time = toc;
@@ -63,7 +64,7 @@ Test2timestart = toc;
 Test2 = sim('LinearTopTest');
 subplot(2,2,2);
 plot(Test2.Theta_Model.time,Test2.Theta_Model.data(:,2:3))
-title('Model 2');
+title('Model 1');
 xlabel('Time [s]');
 ylabel('angle [rad]');
 
@@ -71,7 +72,7 @@ Parameters.PoleGain = K3;
 Test3 = sim('LinearTopTest');
 subplot(2,2,3);
 plot(Test3.Theta_Model.time,Test3.Theta_Model.data(:,2:3))
-title('Model 3');
+title('Model 1');
 xlabel('Time [s]');
 ylabel('angle [rad]');
 
@@ -79,7 +80,7 @@ Parameters.PoleGain = K4;
  Test4 = sim('LinearTopTest');
 subplot(2,2,4);
 plot(Test4.Theta_Model.time,Test4.Theta_Model.data(:,2:3));
-title('Model 4');
+title('Model 1');
 xlabel('Time [s]');
 ylabel('angle [rad]');
 
@@ -90,15 +91,17 @@ plot(Test3.UnSaturatedInput);
 % plot(Test4.UnSaturatedInput.data); -> Not shown because it is very far
 % off. 
 title('INPUT');
-legend('Controller 1', 'Controller 2', 'Controller 3');
 axis([0 10 -1 1]);
-
 figure; 
-plot(Test1.Error.data);
-title('Error');
-figure;
+plot(Test1.Error.data);hold on;
 plot(Test2.Error.data);
-title('Error');
-figure;
 plot(Test3.Error.data);
+%plot(Test4.Error.data);
+
 title('Error');
+%figure;
+
+%plot(Test2.RealTheta.data);
+%title('TRUE THETA');
+%% 
+% P1 zijn de poles van de Observer. K1 wordt gebruikt.
