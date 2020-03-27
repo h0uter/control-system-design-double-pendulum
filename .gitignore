@@ -13,6 +13,7 @@
 *.mex*
 
 # Simulink Code Generation
+Pendulum_model/slprj/
 slprj/
 *.slxc
 # Session info
