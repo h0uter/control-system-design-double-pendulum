@@ -5,7 +5,10 @@ h=0.00002;
 close all
 
 %% TRIAL AND ERROR
-P2 =  -[5, 12, 50, 60, 100];
+w = [4, 4, 3.75, 3]; % away from frequencies from the system. 
+zeta = [ 0.6, 0.65, 0.7, 1.1];
+PoleFunc = @(w,zeta) -w.*zeta+ [w.*sqrt(zeta.^2-1),-w.*sqrt(zeta.^2-1) ];
+P2 = [PoleFunc(w(3),zeta(3)), -50.0, -60.0, -100.0];
 A = Parameters.LinTopA;
 B = Parameters.LinTopB;
 C = Parameters.LinTopXY;

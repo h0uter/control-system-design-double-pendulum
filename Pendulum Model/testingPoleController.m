@@ -14,7 +14,7 @@ damp(sys)
 
 PoleFunc = @(w,zeta) -w.*zeta+ [w.*sqrt(zeta.^2-1),-w.*sqrt(zeta.^2-1) ];
 w = [4, 4, 3.75, 3]; % away from frequencies from the system. 
-zeta = [ 0.6, 0.65, 0.8, 1.1];
+zeta = [ 0.6, 0.65, 0.7, 1.1];
 PoleFunc(w',zeta')
 P1 = [PoleFunc(w(1),zeta(1)), -50.0, -60.0, -100.0];
 P2 = [PoleFunc(w(2),zeta(2)), -50.0, -60.0, -100.0];
@@ -91,6 +91,7 @@ plot(Test4.Theta_Model.time,Test4.Theta_Model.data(:,2:3));
 title('Model 4');
 xlabel('Time [s]');
 ylabel('angle [rad]');
+%% Additional Figures
 figure;
 plot(Test1.UnSaturatedInput);hold on;
 plot(Test2.UnSaturatedInput);

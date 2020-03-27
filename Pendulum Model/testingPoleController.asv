@@ -1,19 +1,26 @@
 %% LOAD PARAM
-clear all;
-Parameters = EstimatedParams();
+%clear all;
+%Parameters = EstimatedParams();
 h=0.00002;
 close all
-%%
-%% TRIAL AND ERROR
-P1 = -[4, 8, 50.0, 60.0, 100.0];
-P2 =  -[5, 12, 50, 60, 100];
-P3 = -[2, 10, 50.0, 60.0, 100.0];
-P4 = -[10, 16, 50, 60, 100];
+%% Setting up the system
 A = Parameters.LinTopA;
 B = Parameters.LinTopB;
 C = Parameters.LinTopXY;
-D = [ 0 ; 0];
-sys = ss(A, B, C,D);
+sys = ss(A, B, C,0);
+%% Setting up formulas and do it the right way
+w = 5; % away from frequencies from the system. 
+dampingfactor = [ 0.4, 0.6, 0.7, 1.2];
+PoleFunc = @(zeta)w*zeta+ [sqrt(zeta^2-1),-sqrt(zeta^2-1) ];
+P1 = [PoleF
+
+
+%% TRIAL AND ERROR
+P1 = -[1, 6, 50.0, 60.0, 100.0];
+P2 =  -[1, 12, 50, 60, 100];
+P3 = -[complex(1, 4) , complex(1, -4), 50, 60, 100];
+P4 = -[complex(2, 2) , complex(2, -2), 50, 60, 100];
+%% Place Poles
 K1 = place(A, B, P1);
 K2 = place(A, B, P2);
 K3 = place(A, B, P3);   
@@ -43,12 +50,11 @@ sysCL4 = ss(Ac4, B, C, D);
  impulse(sysCL4);
 
 %% RETRIEVING DATA FROM NL MODEL
-firstLocation = [ -0.3 0.3];
+firstLocation = [ -0.3 0.1];
 firstLocationFull = [ 0 , firstLocation, 0, 0];
 
 %% OBSERVE BEST MODEL
 Parameters.PoleGain = K1;
-Parameters.PoleReferenceGain = K1;
 tic;
 Test1 = sim('LinearTopTest');
 Test1time = toc;
@@ -64,7 +70,7 @@ Test2timestart = toc;
 Test2 = sim('LinearTopTest');
 subplot(2,2,2);
 plot(Test2.Theta_Model.time,Test2.Theta_Model.data(:,2:3))
-title('Model 1');
+title('Model 2');
 xlabel('Time [s]');
 ylabel('angle [rad]');
 
@@ -72,7 +78,7 @@ Parameters.PoleGain = K3;
 Test3 = sim('LinearTopTest');
 subplot(2,2,3);
 plot(Test3.Theta_Model.time,Test3.Theta_Model.data(:,2:3))
-title('Model 1');
+title('Model 3');
 xlabel('Time [s]');
 ylabel('angle [rad]');
 
@@ -80,7 +86,7 @@ Parameters.PoleGain = K4;
  Test4 = sim('LinearTopTest');
 subplot(2,2,4);
 plot(Test4.Theta_Model.time,Test4.Theta_Model.data(:,2:3));
-title('Model 1');
+title('Model 4');
 xlabel('Time [s]');
 ylabel('angle [rad]');
 
@@ -88,20 +94,20 @@ figure;
 plot(Test1.UnSaturatedInput);hold on;
 plot(Test2.UnSaturatedInput);
 plot(Test3.UnSaturatedInput);
-% plot(Test4.UnSaturatedInput.data); -> Not shown because it is very far
-% off. 
+plot(Test4.UnSaturatedInput); 
 title('INPUT');
+legend('Controller 1', 'Controller 2', 'Controller 3');
 axis([0 10 -1 1]);
+
 figure; 
-plot(Test1.Error.data);hold on;
-plot(Test2.Error.data);
-plot(Test3.Error.data);
-%plot(Test4.Error.data);
-
+plot(Test1.Error.data);
 title('Error');
-%figure;
-
-%plot(Test2.RealTheta.data);
-%title('TRUE THETA');
+figure;
+plot(Test2.Error.data);
+title('Error');
+figure;
+plot(Test3.Error.data);
+title('Error');
+plot(Test4.Error.data);
+title('Error');
 %% 
-% P1 zijn de poles van de Observer. K1 wordt gebruikt.
