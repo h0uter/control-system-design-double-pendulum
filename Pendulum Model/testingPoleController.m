@@ -111,4 +111,24 @@ plot(Test3.Error.data);
 title('Error');
 plot(Test4.Error.data);
 title('Error');
-%% 
+%% Calculating the table
+
+S1 = SettlingTime(Test1.Theta_Model.data(:,2:3));
+S2 = SettlingTime(Test2.Theta_Model.data(:,2:3));
+S3 = SettlingTime(Test3.Theta_Model.data(:,2:3));
+S4 = SettlingTime(Test4.Theta_Model.data(:,2:3));
+SettlingTimes = [Test1.Theta_Model.time(S1);
+    Test2.Theta_Model.time(S2);
+    Test3.Theta_Model.time(S3);
+    Test4.Theta_Model.time(S4)]
+InputPower = [CalcInputPower(Test1),CalcInputPower(Test2), ...
+    CalcInputPower(Test3),CalcInputPower(Test4)]
+function SettleTime = SettlingTime(data) 
+margin = 0.05;
+Part1 = find(abs(data(:,1)) > margin);
+Part2 = find(abs(data(:,2)) > margin);
+SettleTime =  max([Part1; Part2]);
+end
+function Power = CalcInputPower(dataset) 
+Power = rms(dataset.UnSaturatedInput.data)^2;
+end
