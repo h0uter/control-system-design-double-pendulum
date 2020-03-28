@@ -27,13 +27,6 @@ K3 = place(A', C', P3);
 K4 = place(A', C', P4);
 %% RETRIEVING DATA FROM NL MODEL
 firstLocation = [ 0 0];
-time=10;
-lengthinput = 8;
-ampl=0.001;
-lengthSpace = int32(time/(h*lengthinput));
-Input = [linspace(0,time,lengthSpace)',  -1/2*ampl+ampl*round(rand(1,lengthSpace))'];
-Data = sim('woutModel');
-Theta = Data.Theta;
 %% OBSERVE BEST MODEL
 Parameters.K = K1;
 Test1 = sim('LinearTopTest');
@@ -60,4 +53,4 @@ plot(Test4.Error.data);
 figure;
 plot(Test4.Theta_Model.data(:,4:5));
 %% 
-% P1 zijn de poles van de Observer. K1 wordt gebruikt.
+% P1 zijn de poles van de Observer. K4 wordt gebruikt.
