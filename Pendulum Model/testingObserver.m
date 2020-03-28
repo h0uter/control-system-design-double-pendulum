@@ -1,13 +1,19 @@
 %% LOAD PARAM
-Parameters = EstimatedParams();
+%Parameters = EstimatedParams();
+PoleFunc = @(w,zeta) -w.*zeta+ [w.*sqrt(zeta.^2-1),-w.*sqrt(zeta.^2-1) ];
+w = [4, 4, 3.75, 3]; % away from frequencies from the system. 
+zeta = [ 1.05, 1, 1.5, 2.1];
+PR3 = [PoleFunc(w(3),zeta(3)), -50.0, -60.0, -100.0];
+Parameters.PoleGain = place(A, B, P3);   
 close all
 %% TRIAL AND ERROR
-P1 = -[0.0001, 0.00155, 6000, 9000, 10000];
-P2 = -[1000, 1500, 3000, 4000, 5000];
-P3 = -[50, 90, 300, 400, 500];
-P4 = -[50, 75, 600, 700, 800];
+P1 = [PoleFunc(25,zeta(1)), -200.0, -300.0, -500.0];
+P2 = [PoleFunc(25,zeta(2)), -200.0, -300.0, -500.0];
+P3 = [PoleFunc(25,zeta(3)), -500.0, -600.0, -1000.0];
+P4 = [PoleFunc(40,zeta(4)), -500.0, -600.0, -1000.0];
 A = Parameters.LinTopA;
 B = Parameters.LinTopB;
+Parameters.PoleGain = place(A, B, PR3);   
 C = Parameters.LinTopXY;
 sys = ss(A, B, C,0);
 
@@ -31,26 +37,40 @@ firstLocation = [ 0 0];
 Parameters.K = K1;
 Test1 = sim('LinearTopTest');
 figure;
+
 plot(Test1.Error.data);
 figure;
-plot(Test1.Theta_Model.data(:,4:5));
+subplot(2,1,1);
+plot(Test1.RealTheta);
+subplot(2,1,2);
+plot(Test1.Theta_Model.data(:,2:3));
 Parameters.K = K11;
 Test2 = sim('LinearTopTest');
 figure;
-plot(Test2.Error.data);
+plot(Test2.Error)
 figure;
-plot(Test2.Theta_Model.data(:,4:5));
+subplot(2,1,1);
+plot(Test2.RealTheta);
+subplot(2,1,2);
+plot(Test2.Theta_Model.data(:,2:3));
+
 Parameters.K = K3;
 Test3 = sim('LinearTopTest');
 figure;
 plot(Test3.Error.data);
 figure;
-plot(Test3.Theta_Model.data(:,4:5));
+subplot(2,1,1);
+plot(Test3.RealTheta);
+subplot(2,1,2);
+plot(Test3.Theta_Model.data(:,2:3));
 Parameters.K = K4;
 Test4 = sim('LinearTopTest');
 figure;
 plot(Test4.Error.data);
 figure;
-plot(Test4.Theta_Model.data(:,4:5));
+subplot(2,1,1);
+plot(Test4.RealTheta);
+subplot(2,1,2);
+plot(Test4.Theta_Model.data(:,2:3));
 %% 
 % P1 zijn de poles van de Observer. K4 wordt gebruikt.
