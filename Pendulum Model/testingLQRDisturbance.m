@@ -6,7 +6,7 @@ h=0.00002;
 close all
 
 %% TRIAL AND ERROR
-K2 =  [0.0849 2.6780 2.4547 -0.3203 0.1625]; %from testing polecontroller.m
+K2 =  [-0.0148 8.7739 7.3655 1.3853 0.6376]; %from testing LQR.m
 A = Parameters.LinTopA;
 B = Parameters.LinTopB;
 C = Parameters.LinTopXY;
