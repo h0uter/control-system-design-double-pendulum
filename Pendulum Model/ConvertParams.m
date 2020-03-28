@@ -35,9 +35,9 @@ Parameters.LinTopA = [-1/Parameters.Te,0,0,0,0,;
 
 Parameters.LinTopB = [ Parameters.km /Parameters.Te; zeros(4,1)];
 Parameters.LinTopXY  = [zeros(2,1), eye(2), zeros(2)];
-Parameters.K =  1.0e+05 * [   
-    0.0001    0.0074   -0.0012    0.1090   -0.3960;
-   -2.5248e-05  -0.0009    0.0101   -0.2145    1.2802 ];
+Parameters.K =  1.0e+04 * [
+   0.0001    0.0312   -0.0065   -0.0110   -0.5969;
+   -0.0001   -0.0034    0.0558    0.0506    4.0877 ];
 %Parameters.PoleGain = 1.0e+02  *[
 %    -0.000067591280490  -0.969428411401532  -1.022005191642317  -0.193438191643539  -0.089193487968499];
 sys = ss(Parameters.LinTopA, Parameters.LinTopB, Parameters.LinTopXY, 0);
