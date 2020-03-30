@@ -37,7 +37,7 @@ Parameters.LinTopB = [ Parameters.km /Parameters.Te; zeros(4,1)];
 Parameters.LinTopXY  = [zeros(2,1), eye(2), zeros(2)];
 Parameters.K =  1.0e+04 * [
    2.0116    0.0688   -0.0193    1.0469   -2.6729;
-   -4.1368   -0.0185    0.1018   -2.1912    6.1719 ];
+   -4.1368   -0.0185    0.1018   -2.1912    6.1719 ]; % K3 in the observerdesign
 %Parameters.PoleGain = 1.0e+02  *[
 %    -0.000067591280490  -0.969428411401532  -1.022005191642317  -0.193438191643539  -0.089193487968499];
 sys = ss(Parameters.LinTopA, Parameters.LinTopB, Parameters.LinTopXY, 0);
@@ -48,8 +48,17 @@ Parameters.Bd = sysd.B;
 Parameters.Cd = sysd.C;
 Parameters.PoleGainLQR = [ -0.2058   90.6459   80.9736   14.0066    7.0228];
 Parameters.PoleGainPolePlace = [ 0.0810    4.9899    4.0572    0.1231    0.3565];
-Parameters.ErrorGains = 0.95 +  0.1*rand(1,5);
-%Parameters.ErrorGains = [1.0258 1.0243 0.9892 1.0155 0.9671];
+switch 'FixedParam'
+    case 'Setup'
+    Parameters.ErrorGains = 0.95 +  0.1*rand(1,5);
+    case 'FixedParam'
+        % This way, you can find exactly the same results as we have in our
+        % report. You can choose if you prefer to use random gains or use
+        % the same ones. 
+    Parameters.ErrorGains = [0.9852  1.0331  1.0085  1.0050  1.0417];
+end
+
+
 % To make exactly the same graphs as we did. 
 Parameters.disturbance = 0;
 end

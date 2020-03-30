@@ -11,7 +11,7 @@ A = Parameters.LinTopA;
 B = Parameters.LinTopB;
 C = Parameters.LinTopXY;
 D = [ 0 ; 0];
-sys = ss(A, B, C,D);
+sys = ss(A, B, C,D);    
 
 %% Initialize position
 firstLocation = [0 0];
@@ -24,7 +24,7 @@ Test = sim('LinearTopTest');
 %% plot
 figure(1)
 plot(Test.sim_time.data,Test.Theta_Model.data(:,2:3))
-legend('Theta1','Theta2','Reference');
+legend('Theta1','Theta2');
 xlabel('Time [s]');
 ylabel('Angle [rad]');
 title('Stabilizing LQR controller after disturbance of second link at t = 1 second')

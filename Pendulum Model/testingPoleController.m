@@ -100,17 +100,6 @@ plot(Test4.UnSaturatedInput);
 title('INPUT');
 legend('Controller 1', 'Controller 2', 'Controller 3', 'Controller 4');
 axis([0 10 -1 1]);
-figure; 
-plot(Test1.Error.data);
-title('Error');
-figure;
-plot(Test2.Error.data);
-title('Error');
-figure;
-plot(Test3.Error.data);
-title('Error');
-plot(Test4.Error.data);
-title('Error');
 %% Calculating the table
 
 S1 = SettlingTime(Test1.Theta_Model.data(:,2:3));
