@@ -21,3 +21,4 @@ octave-workspace
 
 # Simulink autosave extension
 .autosave
+*.r2018a

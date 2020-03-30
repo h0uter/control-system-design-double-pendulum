@@ -49,5 +49,7 @@ Parameters.Cd = sysd.C;
 Parameters.PoleGainLQR = [ -0.2058   90.6459   80.9736   14.0066    7.0228];
 Parameters.PoleGainPolePlace = [ 0.0810    4.9899    4.0572    0.1231    0.3565];
 Parameters.ErrorGains = 0.95 +  0.1*rand(1,5);
+%Parameters.ErrorGains = [1.0258 1.0243 0.9892 1.0155 0.9671];
+% To make exactly the same graphs as we did. 
 Parameters.disturbance = 0;
 end
