@@ -7,6 +7,13 @@ Map structure:
  - measurements: A couple of measurements (in .mat files of the physical pendulum)
  - Pendulum Model: All white-box scripts. Almost all files used for creating our report are in here. 
  - Physical Parts: These files contain the physcial model to control the pendulum. It is not necessary to run any of these files in here. 
-
-Auxillary files: (These files are not needed to be run directly. These are called by other scripts and )
+Scripts directly used for the report: 
 2.1: White-Box Model. 
+
+Auxillary files: (These files are not needed to be run directly. These are called by other scripts or are purely used in a physical context) 
+- calibration2.m and measureAngles: these were used for calibrating the pendulum.
+- blackbox/ParamEstimatebb.slx (used for blackbox) 
+- Linearisation/LoadTopEstParameters.m
+- measurements/* 
+- Pendulum_Model/
+    - 
