@@ -113,7 +113,7 @@ SettlingTimes = [Test1.Theta_Model.time(S1);
 InputPower = [CalcInputPower(Test1),CalcInputPower(Test2), ...
     CalcInputPower(Test3),CalcInputPower(Test4)]
 function SettleTime = SettlingTime(data) 
-margin = 0.05;
+margin = 0.08;
 Part1 = find(abs(data(:,1)) > margin);
 Part2 = find(abs(data(:,2)) > margin);
 SettleTime =  max([Part1; Part2]);
